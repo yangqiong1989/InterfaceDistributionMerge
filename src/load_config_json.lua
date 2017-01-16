@@ -1,4 +1,4 @@
-local json = require('json')
+local json = require('cjson')
 local constant = require('constant')
 local tools = require('tools')
 local dogs = ngx.shared.dogs
