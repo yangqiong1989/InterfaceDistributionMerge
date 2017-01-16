@@ -20,6 +20,7 @@ end
 --get distribute
 function _M.get_distribute(file_name)
   local result = _M.load_config_json(file_name)
+  ngx.log(ngx.ERR,'config file result:',result)
   local jsontable = json.decode(result)
   local distribute = jsontable['distribute']
   return distribute

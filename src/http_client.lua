@@ -1,12 +1,13 @@
 local tools = require('tools')
 local constant = require('constant')
 local http = require('http')
-local httpc = http.new()
 local _M = {}
 
 --http request
 function _M.http_request(url)
+  local httpc = http.new()
   httpc:set_timeout(500)
+  ngx.log(ngx.ERR,'request url  is === ',url)
   local res, err = httpc:request_uri(url, {
     method = "GET",
     headers = {
@@ -14,6 +15,8 @@ function _M.http_request(url)
       ["Connection"] = 'Keep-Alive',
     },constant.http_max_conn,constant.http_max_expires
   })
+  
+--  ngx.log(ngx.ERR,'response content is === ',res.status)
   if not res then 
     return nil
   else
