@@ -19,7 +19,6 @@ for k,v in pairs(distributes) do
       distributestring = tools.replace(distributestring,'$'..key,val)
     end
   end
-  --distributestring = json.decode(distributestring)
   ngx.log(ngx.ERR,k..'=======distributestring========'..distributestring)
   table.insert(threads,ngx.thread.spawn(http.http_request,distributestring))
 end
