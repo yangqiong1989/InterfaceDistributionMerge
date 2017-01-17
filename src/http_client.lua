@@ -3,8 +3,8 @@ local constant = require('constant')
 local http = require('http')
 local _M = {}
 
---http request
-function _M.http_request(url)
+--http external request
+function _M.http_external_request(url)
   local httpc = http.new()
   httpc:set_timeout(500)
   local res, err = httpc:request_uri(url, {
@@ -22,5 +22,18 @@ function _M.http_request(url)
     return res
   end
 end
+
+--http internal request
+function _M.http_internal_request(urls)
+  --ngx.log(ngx.ERR,'http_internal_request urls:',urls)
+  local res = { ngx.location.capture_multi(urls) }
+  if not res then 
+    return nil
+  else
+    return res
+  end
+end
+
+
 
 return _M

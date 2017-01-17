@@ -17,13 +17,21 @@ function _M.load_config_json(file_name)
     return result
   end
 end
---get distribute
-function _M.get_distribute(file_name)
+--get external
+function _M.get_external(file_name)
   local result = _M.load_config_json(file_name)
-  ngx.log(ngx.ERR,'config file result:',result)
+  ngx.log(ngx.ERR,'get_external result:',result)
   local jsontable = json.decode(result)
-  local distribute = jsontable['distribute']
-  return distribute
+  local external = jsontable['external']
+  return external
+end
+--get internal
+function _M.get_internal(file_name)
+  local result = _M.load_config_json(file_name)
+  ngx.log(ngx.ERR,'get_internal result:',result)
+  local jsontable = json.decode(result)
+  local internal = jsontable['internal']
+  return internal
 end
 --get need delete_key
 function _M.get_need_delete_key(file_name)
