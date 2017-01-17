@@ -27,8 +27,11 @@ for i=1,#threads,1 do
   local ok,res = ngx.thread.wait(threads[i])
   if ok then
     ngx.log(ngx.ERR,res.status..'*********************'..res.body)
-    table.insert(responses,res.body)
+    table.insert(responses,json.decode(res.body))
   else
     ngx.log(ngx.ERR,res.status..'*********************'..res.body)
   end
 end
+
+ngx.say(json.encode(responses))
+
