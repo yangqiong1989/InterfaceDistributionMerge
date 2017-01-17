@@ -7,7 +7,6 @@ local _M = {}
 function _M.http_request(url)
   local httpc = http.new()
   httpc:set_timeout(500)
-  ngx.log(ngx.ERR,'request url  is === ',url)
   local res, err = httpc:request_uri(url, {
     method = "GET",
     headers = {

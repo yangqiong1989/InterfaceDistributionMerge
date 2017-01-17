@@ -19,16 +19,16 @@ for k,v in pairs(distributes) do
       distributestring = tools.replace(distributestring,'$'..key,val)
     end
   end
-  ngx.log(ngx.ERR,k..'=======distributestring========'..distributestring)
   table.insert(threads,ngx.thread.spawn(http.http_request,distributestring))
 end
 
-
+local responses = {}
 for i=1,#threads,1 do
   local ok,res = ngx.thread.wait(threads[i])
   if ok then
-    ngx.log(ngx.ERR,res.status..'------'..res.body)
+    ngx.log(ngx.ERR,res.status..'*********************'..res.body)
+    table.insert(responses,res.body)
   else
-    ngx.log(ngx.ERR,res.status..'------'..res.body)
+    ngx.log(ngx.ERR,res.status..'*********************'..res.body)
   end
 end
