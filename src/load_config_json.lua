@@ -20,7 +20,7 @@ end
 --get external
 function _M.get_external(file_name)
   local result = _M.load_config_json(file_name)
-  ngx.log(ngx.ERR,'get_external result:',result)
+--  ngx.log(ngx.ERR,'get_external result:',result)
   local jsontable = json.decode(result)
   local external = jsontable['external']
   return external
@@ -28,7 +28,7 @@ end
 --get internal
 function _M.get_internal(file_name)
   local result = _M.load_config_json(file_name)
-  ngx.log(ngx.ERR,'get_internal result:',result)
+--  ngx.log(ngx.ERR,'get_internal result:',result)
   local jsontable = json.decode(result)
   local internal = jsontable['internal']
   return internal

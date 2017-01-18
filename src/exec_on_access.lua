@@ -45,6 +45,8 @@ for k,v in pairs(threads_externals) do
   local ok,res = ngx.thread.wait(v)
   if ok then
     table.insert(externals_responses,json.decode(res.body))
+  else
+    
   end
 end
 
