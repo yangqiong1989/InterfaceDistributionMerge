@@ -14,9 +14,7 @@ function _M.http_external_request(url)
       ["Connection"] = 'Keep-Alive',
     },constant.http_max_conn,constant.http_max_expires
   })
-  
---  ngx.log(ngx.ERR,'response content is === ',res.status)
-  if not res then 
+  if not res then
     return nil
   else
     return res
@@ -25,15 +23,12 @@ end
 
 --http internal request
 function _M.http_internal_request(urls)
-  --ngx.log(ngx.ERR,'http_internal_request urls:',urls)
-  local res = { ngx.location.capture_multi(urls) }
-  if not res then 
+  local res = ngx.location.capture(urls)
+  if not res then
     return nil
   else
     return res
   end
 end
-
-
 
 return _M
