@@ -43,7 +43,8 @@ end
 local externals_responses = {}
 for k,v in pairs(threads_externals) do
   local ok,res = ngx.thread.wait(v)
-  if ok then
+  if ok and res then
+    ngx.log(ngx.INFO,'【'..external_keys[k]..'】'..'********************'..res.body)
     table.insert(externals_responses,json.decode(res.body))
   else
     
@@ -57,6 +58,7 @@ for k,v in pairs(externals_responses) do
 end
 
 ngx.say(json.encode(merge_response))
+ngx.exit(200)
 
 
 
