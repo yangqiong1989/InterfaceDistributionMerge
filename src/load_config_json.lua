@@ -33,11 +33,11 @@ function _M.get_internal(file_name)
   local internal = jsontable['internal']
   return internal
 end
---get need delete_key
-function _M.get_need_delete_key(file_name)
+--get check key
+function _M.get_check_key(file_name)
   local result = _M.load_config_json(file_name)
   local jsontable = json.decode(result)
-  local delete_key = jsontable['delete_key']
+  local delete_key = jsontable['check_key']
   return delete_key
 end
 --get relational_mapping
