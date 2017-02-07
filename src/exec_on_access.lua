@@ -6,8 +6,9 @@ local http = require('http_client')
 --get ngx parameter to load config file
 local config_file_name = tostring(ngx.var.config_file_name)
 --get api uri args
---local args = ngx.var.args
-local args = {roomid=69590,matchid=69590}
+--local args = ngx.var.argss
+local args = {roomid=ngx.var.roomid,matchid=ngx.var.matchid}
+--ngx.log(ngx.ERR,'********************'..args)
 
 local internals = config.get_internal(config_file_name)
 local check_key = config.get_check_key(config_file_name)
@@ -50,9 +51,18 @@ for k,v in pairs(externals) do
     if not internals_responses[internal_check_parameter] and external_key==external_check_key then
       break
     end
-    for key, val in pairs(args) do
-      if string.find(external_url,'$'..key) then
-        external_url = tools.replace(external_url,'$'..key,val)
+    if string.find(external_url,'http') then
+      for key, val in pairs(args) do
+        if string.find(external_url,'$'..key) then
+          external_url = tools.replace(external_url,'$'..key,val)
+        end
+      end
+    else 
+      local rule = tools.split(external_url,'-')
+      local rule_key = rule[1]
+      local rule_parameter = rule[2]
+      if rule_key==internal_key then
+        external_url = internals_responses[rule_parameter]
       end
     end
     table.insert(threads_externals,ngx.thread.spawn(http.http_external_request,external_url))
