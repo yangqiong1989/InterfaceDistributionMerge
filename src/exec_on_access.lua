@@ -30,9 +30,11 @@ if res then
 end
 
 --check internal key to confirm continue external
+--get key-param@key 
 local check_key_split = tools.split(check_key[1],'@')
 local internal_check_key_parameter = check_key_split[1]
 local external_check_key = check_key_split[2]
+--get key-param
 local internal_check_key_split = tools.split(internal_check_key_parameter,'-')
 local internal_check_key = internal_check_key_split[1]
 local internal_check_parameter = internal_check_key_split[2]

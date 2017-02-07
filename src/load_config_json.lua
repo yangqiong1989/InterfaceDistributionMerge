@@ -37,8 +37,8 @@ end
 function _M.get_check_key(file_name)
   local result = _M.load_config_json(file_name)
   local jsontable = json.decode(result)
-  local delete_key = jsontable['check_key']
-  return delete_key
+  local check_key = jsontable['check_key']
+  return check_key
 end
 --get relational_mapping
 function _M.get_relational_mapping(file_name)
