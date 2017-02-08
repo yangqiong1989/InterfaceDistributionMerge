@@ -3,11 +3,12 @@ local config = require('load_config_json')
 local json = require('cjson')
 local constant = require('constant')
 local http = require('http_client')
+local transfer = require('objstring_transfer')
 --get ngx parameter to load config file
 local config_file_name = tostring(ngx.var.config_file_name)
 --get api uri args
---local args = ngx.var.argss
-local args = {roomid=ngx.var.roomid,matchid=ngx.var.matchid}
+local args = transfer.unserialize(ngx.var.package_args)
+--local args = {roomid=ngx.var.roomid,matchid=ngx.var.matchid}
 --ngx.log(ngx.ERR,'********************'..args)
 
 local internals = config.get_internal(config_file_name)
